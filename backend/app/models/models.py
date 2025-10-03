@@ -1,6 +1,6 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Table, Text, Enum as SQLEnum, Float
+from sqlalchemy import Column, Integer, String, ForeignKey, Text, Enum as SQLEnum, Float
 from sqlalchemy.orm import relationship
-from backend.app.db.session import Base
+from app.db.session import Base
 import enum
 
 # user table 

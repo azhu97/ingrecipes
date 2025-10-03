@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base, Session
 
-DATABASE_URL  = "postgresql+psycopg2://ki-kak:Apple%123@localhost:5432/ingrecipes"
+DATABASE_URL  = "postgresql+psycopg2://ki-kak:AlanZhu1@localhost:5432/ingrecipes"
 
 # Create DB engine
 engine = create_engine(DATABASE_URL, echo=True)

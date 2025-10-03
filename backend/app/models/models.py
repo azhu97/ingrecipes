@@ -1,13 +1,13 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Table, Text, Enum as SQLEnum, Float
 from sqlalchemy.orm import relationship
-from app.db.session import Base
+from backend.app.db.session import Base
 import enum
 
 # user table 
 class User(Base):
     __tablename__ = "users"
-    
-    id = Column(Integer, primary_key=True index=True)
+
+    id = Column(Integer, primary_key=True)
     email = Column(String, unique=True, index=True, nullable=False) # should not be null
     name = Column(String)
     hashed_password = Column(String, nullable=False) 

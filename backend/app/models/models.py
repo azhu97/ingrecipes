@@ -3,15 +3,18 @@ from sqlalchemy.orm import relationship
 from app.db.session import Base
 import enum
 
-# user table 
+# User table
 class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True)
-    email = Column(String, unique=True, index=True, nullable=False) # should not be null
-    name = Column(String)
-    hashed_password = Column(String, nullable=False) 
-    ingredients = relationship("Ingredient", back_populates="user")
+    email = Column(String(255), unique=True, index=True, nullable=False)
+    name = Column(String(100))
+    hashed_password = Column(String, nullable=False)
+
+    # one user -> many inventory items
+    inventory_items = relationship("UserInventory", back_populates="user")
+
 
 class IngredientType(enum.Enum):
     MEAT = "meat"
@@ -21,17 +24,26 @@ class IngredientType(enum.Enum):
     FRUIT = "fruit"
     OTHER = "other"
 
+# Ingredient table
 class Ingredient(Base):
     __tablename__ = "ingredients"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String, index=True, nullable=False)
+    name = Column(String(100), index=True, nullable=False)
     description = Column(Text)
     type = Column(SQLEnum(IngredientType), nullable=False)
-    measurement_unit = Column(String) # e.g., grams, liters, cups
-    measurement_count = Column(Float) 
-    user_id = Column(Integer, ForeignKey("users.id"))
-    user = relationship("User", back_populates="ingredients")
 
+    # one ingredient -> many user inventories
+    user_inventories = relationship("UserInventory", back_populates="ingredient")
 
+class UserInventory(Base):
+    __tablename__ = "user_inventories"
 
+    user_id = Column(Integer, ForeignKey("users.id"), primary_key=True)
+    ingredient_id = Column(Integer, ForeignKey("ingredients.id"), primary_key=True)
+    measurement_unit = Column(String(50), nullable=False)
+    quantity = Column(Float, nullable=False)
+
+    # relations 
+    user = relationship("User", back_populates="inventory_items")
+    ingredient = relationship("Ingredient", back_populates="user_inventories")

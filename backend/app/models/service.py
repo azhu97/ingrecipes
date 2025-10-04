@@ -40,7 +40,7 @@ def get_user_inventory(db: Session, user_id: int):
     return db.query(models.UserInventory).filter(models.UserInventory.user_id == user_id).all()
 
 # remove an item from a user's inventory list 
-def remove_item_from_user_inventory(db: Session, user_id: int, ingredient_id: int):
+def remove_ingredient_from_user_inventory(db: Session, user_id: int, ingredient_id: int):
     user = db.query(models.User).filter(models.User.id == user_id).first() # get user by id
 
     ingredient = db.query(models.Ingredient).filter(models.Ingredient.id == ingredient_id).first() # get ingredient by id
@@ -59,6 +59,6 @@ def remove_item_from_user_inventory(db: Session, user_id: int, ingredient_id: in
     db.commit()
     return True 
 
-    
+
     
 

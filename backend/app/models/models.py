@@ -15,7 +15,6 @@ class User(Base):
     # one user -> many inventory items
     inventory_items = relationship("UserInventory", back_populates="user")
 
-
 class IngredientType(enum.Enum):
     MEAT = "meat"
     VEGETABLE = "vegetable"

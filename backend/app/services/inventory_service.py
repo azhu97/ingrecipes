@@ -83,8 +83,5 @@ def update_ingredient_quantity(db: Session, user_id: int, ingredient_id: int, ne
     db.refresh(inventory_item) if new_quantity > 0 else None
     return inventory_item if new_quantity > 0 else None
 
-
-
-
     
 

@@ -3,7 +3,7 @@ from fastapi import HTTPException
 from sqlalchemy.orm import Session
 from app.models import models
 
-def make_user(db: Session, name: str, email: str, hashed_password: str) -> models.User:
+def create_user(db: Session, name: str, email: str, hashed_password: str) -> models.User:
     new_user = models.User(
         name = name,
         email = email, 

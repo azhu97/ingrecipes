@@ -83,5 +83,13 @@ def update_ingredient_quantity(db: Session, user_id: int, ingredient_id: int, ne
     db.refresh(inventory_item) if new_quantity > 0 else None
     return inventory_item if new_quantity > 0 else None
 
-    
+# get the actual ingredient
+def get_ingredient(db: Session, ingredient_id: int):
+    ingredient = db.query(models.Ingredient).filter(models.Ingredient.id == ingredient_id).first()
+    if not ingredient:
+        raise HTTPException(status_code=404, detail="Ingredient not found")
+    return ingredient
+
+def get_all_ingredients(db: Session):
+    return db.query(models.Ingredient).all()
 

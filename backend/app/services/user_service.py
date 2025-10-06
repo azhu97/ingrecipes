@@ -57,3 +57,7 @@ def update_user_password(db: Session, user_id: int, new_password: str) -> models
     db.commit()
     db.refresh(user)
     return user
+
+def delete_all_users(db: Session) -> None:
+    db.query(models.User).delete()
+    db.commit()

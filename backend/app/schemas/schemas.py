@@ -18,4 +18,14 @@ class UserInventorySchema(BaseModel):
     class Config:
         orm_mode = True
 
+class IngredientSchema(BaseModel):
+    id: int
+    name: str
+    description: str
+    type: str
+
+    class Config: 
+        orm_mode = True
+
+
 

@@ -8,4 +8,3 @@ app.include_router(inventory_route.router)
 @app.get("/")
 def read_root():
     return {"Message": "Welcome to the Ingrecipes API!"}
-    
